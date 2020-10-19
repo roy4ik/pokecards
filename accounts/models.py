@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.SET_NULL, null=True, related_name='user_Profile')
-    image = models.ImageField(upload_to='profile_pics/')
+    image = models.ImageField(upload_to='usr/profile/img/')
 
 
 @receiver(post_save, sender=User)
