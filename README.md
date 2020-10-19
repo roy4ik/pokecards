@@ -13,6 +13,8 @@
 ###### Profile form working with image upload
 ###### Add profile image to navbar 
 ###### Fixed image in navbar to all views
+
+### api and cards
 ###### get and find api
 ###### build card view
 ###### build all cards view
