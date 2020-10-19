@@ -32,13 +32,10 @@ class SignUp(CreateView):
 class ProfileUpdate(UpdateView):
     model = Profile
     form_class = UserProfileForm
-    template_name = 'registration/signUp.html'
+    template_name = 'forms/profile-form.html'
     success_url = 'ProfileUpdate'
     failed_message = "The profile couldn't be updated"
 
-    def form_valid(self,form):
-        super().form_valid(form)
-        user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
-        if user:
-            login(self.request,user)
-        return redirect(reverse(self.get_success_url()))
+class ProfileDetail(DetailView):
+    model = Profile
+    template_name = 'partials/profile.html'

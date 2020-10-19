@@ -10,3 +10,5 @@
 ###### create static folders and files, include  links in base.html
 ###### create superuser
 ###### get login form to work in navbar
+###### Profile form working with image upload
+###### Add profile image to navbar 
