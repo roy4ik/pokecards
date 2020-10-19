@@ -1,0 +1,6 @@
+# ignore VMs
+**vm
+**env/
+
+# ignore pycache
+**__pycache__/
