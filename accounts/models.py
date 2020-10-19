@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.SET_NULL, null=True, related_name='user_Profile')
+        User, on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='usr/profile/img/')
 
 
@@ -16,3 +16,6 @@ class Profile(models.Model):
 def create_profile(sender, created, instance, **kwargs):
     if created:
         profile = Profile.objects.create(user=instance)
+
+
+

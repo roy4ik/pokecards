@@ -6,7 +6,7 @@
         <p>Hi {{user.first_name}} {{user.last_name}}. Here you can update your profile</p>
         <p></p>
     </div>
-    <form method='POST'>
+    <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}{% load widget_tweaks %} {{form}} <input class="user-info-input btn" class="btn " type="submit" value="Save"></form>
 </div>
 {%endblock%}
