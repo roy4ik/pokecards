@@ -1,9 +1,4 @@
 from django.shortcuts import render
-
+from django.contrib.auth.views import LoginView, LogoutView
+from accounts.models import Profile
 # Create your views here.
-def home(request):
-    context = {
-        'Title': 'PokeTrade',
-    }
-    return render(request, 'base/base.html', context=context)
-

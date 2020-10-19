@@ -1,2 +1,15 @@
-{% block login %} {% if not user.is_authenticated %} {% csrf_token %}{% load widget_tweaks %} {{ login_form.username|append_attr:"placeholder:Username"}} {{ login_form.password|append_attr:"placeholder:Password"}} Signup {% else %} {{user.username}} Logout
-{%endif%} {% endblock login %}
+{% if form.errors %}
+<p>That didn't work, try again or sign in</p>
+{%endif%}{% if not user.is_authenticated %}
+<form method='POST' style="display: inline-block" class="form-inline my-2 my-lg-0">
+    {% csrf_token %} {% load widget_tweaks %}
+    <div class="">{{ login_form.username|append_attr:"placeholder:Username"}}</div>
+    <div class="">{{ login_form.password|append_attr:"placeholder:Password"}}</div>
+    <input class=" btn" class="btn " type="submit" value="Login">
+    <a class=" btn " href={% url 'SignUp' %}>Signup</a>
+</form>
+{% else %}
+<div>
+    <a class="btn" href='account/profile/{{user.pk}}/update'>{{user.username}}</a>
+    <a class="btn" href="{% url 'logout' %}" class="btn btn-danger " style="display: inline-block">Logout</a> {%endif%}
+</div>

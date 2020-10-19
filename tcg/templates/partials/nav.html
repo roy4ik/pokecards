@@ -22,8 +22,8 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Trades</a>
             </li>
         </ul>
-        <form method='POST' class="form-inline my-2 my-lg-0">
-            {%block login%}{%endblock%}
-        </form>
+
+        {% include 'registration/login.html'%}
+
     </div>
 </nav>

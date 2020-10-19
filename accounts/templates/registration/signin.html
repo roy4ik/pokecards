@@ -1,1 +1,0 @@
-{% extends 'partials/base.html' %} {% block content %} Create your account {% csrf_token %} {{ form.as_p }} Sign Up {% if failed_message %} {{failed_message}} {% endif %} {% endblock content %}
