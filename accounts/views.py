@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
 from .models import *
 from .forms import *
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
@@ -33,7 +33,7 @@ class ProfileUpdate(UpdateView):
     model = Profile
     form_class = UserProfileForm
     template_name = 'forms/profile-form.html'
-    success_url = reverse('profileDetail')
+    success_url = 'profileDetail'
     failed_message = "The profile couldn't be updated"
 
 class ProfileDetail(DetailView):
