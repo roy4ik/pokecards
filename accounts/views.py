@@ -33,7 +33,7 @@ class ProfileUpdate(UpdateView):
     model = Profile
     form_class = UserProfileForm
     template_name = 'forms/profile-form.html'
-    success_url = 'ProfileUpdate'
+    success_url = 'profileDetail'
     failed_message = "The profile couldn't be updated"
 
 class ProfileDetail(DetailView):

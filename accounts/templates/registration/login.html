@@ -10,7 +10,9 @@
 </form>
 {% else %}
 <div>
-    <a class="btn" href="{% url 'profileupdate' user.profile.pk %}">{{user.username}}</a>
-    <a class="btn" href="{% url 'logout' %}" class="btn btn-danger " style="display: inline-block">Logout</a>
+    <div class="nav-item">
+        <a class="ml-2 btn-dark" href="{% url 'profileDetail' user.profile.pk %}"><img class="mr-2" src="../../media/{{user.profile.image}}" alt='User image' width='50' height='50' style='border: solid 3px white; border-radius:50%'>{{user.username}}</a>
+        <a class="ml-2 btn-dark" href="{% url 'logout' %}" class="btn btn-danger " style="display: inline-block">Logout</a>
+    </div>
 </div>
 {%endif%}
