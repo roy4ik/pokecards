@@ -10,22 +10,21 @@ from django.dispatch import receiver
 
 class Color(models.Model):
     name = CharField(max_length=100)
-    url  = URLField()
+    url  = URLField(null=True)
 
 class Type(models.Model):
     name = CharField(max_length=100)
-    url  = URLField()
+    url  = URLField(null=True)
 
 class Species(models.Model):
     name = CharField(max_length=255)
-    base_experience= IntegerField()
-    url  = URLField()
+    url  = URLField(null = True)
     color = ForeignKey(Color, on_delete=models.CASCADE)
     type = ForeignKey(Type, on_delete=models.CASCADE)
 
 class Pokemon(models.Model):
     name = CharField(max_length=255)
-    rarity = IntegerField()
+    base_experience= IntegerField()
     weight = IntegerField()
     img_url = URLField()
     species = ForeignKey(Species, on_delete=models.CASCADE)
