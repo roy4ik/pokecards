@@ -1,6 +1,7 @@
 # ignore VMs
 **vm
 **env/
+**.vscode/
 
 # ignore pycache
 **__pycache__/
