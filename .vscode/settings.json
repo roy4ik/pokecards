@@ -1,3 +1,11 @@
 {
-    "python.pythonPath": "vm/poke/bin/python3.8"
+    "python.pythonPath": "vm/poke/bin/python3.8",
+    "sqltools.connections": [
+        {
+            "previewLimit": 100,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:pokecards}/db.sqlite3",
+            "name": "pokedb"
+        }
+    ]
 }

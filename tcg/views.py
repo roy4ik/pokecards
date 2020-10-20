@@ -45,7 +45,7 @@ def get_card_api(pokemon,species):
         return card
 
 def add_card(card):
-    try:
+    
         # adding color
         color, created = Color.objects.get_or_create(name=card['color'])
         print("type got created in db")
@@ -56,10 +56,9 @@ def add_card(card):
         species, created = Species.objects.get_or_create(name=card['name'], color=color, type=type)
         print("species got created in db")
         #   adding Pokemon
-        pokemon, created = Species.objects.get_or_create(name=card['name'], base_experience=card['base_experience'], weight=card['weight'], img_url=card['img'], species= species, is_legendary = card['is_legendary'])
+        pokemon, created = Pokemon.objects.get_or_create(name=card['name'], base_experience=card['base_experience'], weight=card['weight'], img_url=card['img'], species= species, is_legendary = card['is_legendary'])
         print("pokemon got created in db")
-    except Exception:
-        raise Exception
+
 
 def is_in_db(pokemon_name):
     try:
@@ -115,10 +114,10 @@ def vault_new(request):
         # check if legendary card - max 5 per user
         if legendary == True and legendary_counter < 5:
             legendary_counter += 1
-            user_deck.append(get_card(pokemon,species))
+            user_deck.append(get_card_data(pokemon,species))
             print("adding legendary card")
         elif legendary == False:
-            user_deck.append(get_card(pokemon,species))
+            user_deck.append(get_card_data(pokemon,species))
             print('adding regular card')
         
         print(f"loading new deck : {'{:.2f}'.format(pokemon_number/60*100)}%")

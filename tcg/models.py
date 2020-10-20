@@ -24,11 +24,11 @@ class Species(models.Model):
 
 class Pokemon(models.Model):
     name = CharField(max_length=255)
-    base_experience= IntegerField()
-    weight = IntegerField()
-    img_url = URLField()
+    base_experience= IntegerField(null =True)
+    weight = IntegerField(null =True)
+    img_url = URLField(null =True)
     species = ForeignKey(Species, on_delete=models.CASCADE)
-    is_legendary = BooleanField()
+    is_legendary = BooleanField(null =True)
 
 
 class Offer(models.Model):
