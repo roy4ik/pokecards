@@ -15,9 +15,18 @@
             <li class="nav-item">
                 <a class="nav-link active" href="#" tabindex="-1" aria-active="true">Market</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#" tabindex="-1" aria-active="true">Trades</a>
-            </li>
+            <li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" tabindex="-1" aria-active="true">My Trades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" tabindex="-1" aria-active="true">My Offers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" tabindex="-1" aria-active="true"> My Vault</a>
+                </li>
+                {% endif %}
         </ul>
 
         {% include 'registration/login.html'%}
