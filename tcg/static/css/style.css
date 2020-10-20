@@ -10,11 +10,16 @@ main {
 
 .grid {
     display: grid;
-    grid-gap: 2em;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
+    grid-gap: 3em;
+    grid-template-columns: repeat( auto-fit, minmax(150px, 2fr));
 }
 
 .grid-card {
     border: 0.5px solid grey;
+    margin: 0.2em;
     box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.16);
+}
+
+.card-body {
+    min-height: 240px;
 }

@@ -9,20 +9,24 @@ import random
 
 #  functions
 
-def add_card(pokeapi_url, card):
+def get_card(pokemon,species):
     '''
-    gets the card info from the api
+    gets card details from pokeapi and returns it in dict
+    # params: pokeapi_url: url to pokeapi endpoint
+    # returns card(dict)
     '''
-    print(f'Updating {pokeapi_url} at {card}')
+    card = {}
+    # print(f'getting {pokemon}')
     card.update({
-    'name' : requests.get(pokeapi_url).json()['forms'][0]['name'],
-    'weight' : requests.get(pokeapi_url).json()['weight'],
-    'img' : requests.get(pokeapi_url).json()['sprites']['front_default'],
-    'type' : requests.get(pokeapi_url).json()['types'][0]['type']['name'],
-    'species' : requests.get(pokeapi_url).json()['species']['name'],
-    'color' : requests.get(requests.get(pokeapi_url).json()['species']['url']).json()['color']['name'],
-    'is_legendary' : requests.get(requests.get(pokeapi_url).json()['species']['url']).json()['is_legendary'] 
+    'name' : pokemon['name'],
+    'weight' : pokemon['weight'],
+    'img' : pokemon['sprites']['front_default'],
+    'type' : pokemon['types'][0]['type']['name'],
+    'species' : pokemon['species']['name'],
+    'color' : species['color']['name'],
+    'is_legendary' : species['is_legendary'] 
     })
+    return card
 
 
 # Create your views here.
@@ -34,35 +38,44 @@ def all_cards(request):
             img_url = f'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/{pokemon}.png'
             all_pokemon[pokemon-1].update({'img' : img_url})
         context.update({'all_pokemon': all_pokemon})
-    except ConnectionError:
-        error_msg = "Oops couldn't connect to the API"
+    except requests.HTTPError:
+        error_msg = "all_cards Oops couldn't connect to the API"
         context.update({'all_pokemon': error_msg})
     finally: 
         return render (request, 'all_cards.html', context)
 
 def vault_new(request):
     context = {}
-    try:
-        user_deck = []
-        # 60 cards in a deck
-        for pokemon in range(1,60):
-            # get random card 
-            pokeapi_url = f'https://pokeapi.co/api/v2/pokemon/{random.randint(1,1050)}'
-            print(requests.get(pokeapi_url))
-            legendary_counter = 0
-            # check if legendary card - max 5 per user
-            if requests.get(requests.get(pokeapi_url).json()['species']['url']).json()['is_legendary'] == True and legendary_counter < 5:
-                legendary_counter += 1
-                print("adding legendary card")
-                add_card(pokeapi_url, user_deck[pokemon-1])
-            elif requests.get(requests.get(pokeapi_url).json()['species']['url']).json()['is_legendary'] == False:
-                print('adding regular card')
-                add_card(pokeapi_url, user_deck[pokemon-1])
-                
-        print("user deck initialized")
-        context.update({'user_deck': user_deck})
-    except ConnectionError:
-        error_msg = "Oops couldn't connect to the API"
-        context.update({'user_deck': error_msg})
-    finally: 
-        return render (request, 'vault.html', context)
+    user_deck = []
+
+    # 60 cards in a deck
+    for pokemon_number in range(60):
+        # get random card 
+        pokeapi_url = f'https://pokeapi.co/api/v2/pokemon/{random.randint(1,893)}'
+        try:
+            print(pokeapi_url)
+            pokemon = requests.get(pokeapi_url).json()
+            species = requests.get(pokemon['species']['url']).json()
+        except requests.HTTPError:
+            if pokemon_number > 0:
+                pokemon_number -=1
+            print("Connection Error - trying again")
+            continue
+            
+        legendary = species['is_legendary']
+        legendary_counter = 0
+
+        # check if legendary card - max 5 per user
+        if legendary == True and legendary_counter < 5:
+            legendary_counter += 1
+            user_deck.append(get_card(pokemon,species))
+            print("adding legendary card")
+        elif legendary == False:
+            user_deck.append(get_card(pokemon,species))
+            print('adding regular card')
+        
+        print(f"loading new deck : {'{:.2f}'.format(pokemon_number/60*100)}%")
+
+    context.update({'user_deck': user_deck})
+    print("user deck initialized")
+    return render (request, 'vault_new.html', context)
