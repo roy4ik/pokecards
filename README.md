@@ -21,3 +21,15 @@
 ###### build card view
 ###### build all cards view
 ###### build user deck with random and shuffle but fair
+
+
+
+
+### UI/UX
+###### overhaul design
+###### check for consistency
+###### review UX
+
+
+### Deploy
+###### chose server for hosting and data hosting
