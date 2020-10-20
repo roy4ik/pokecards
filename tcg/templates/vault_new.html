@@ -1,15 +1,14 @@
 {% extends 'base/base.html' %} {%block content%}
 <div class="grid">
     {% for pokemon in user_deck %}
-    <div class="grid-card" style="width: 14rem; background-color: {{pokemon.color}};">
+    <div class="grid-card" style="width: 18rem; background-color: {{pokemon.color}};">
         <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
-        <div class="card-body">
+        <div class="card-body bg-light">
             <h5 class="card-title">{{pokemon.name |title}}</h5>
             <p>{{pokemon.weight}}</p>
             <p> {{pokemon.type}}</p>
-            <p>{{pokemon.color}}</p>
             <p>{{pokemon.species}}</p>
-            {% if pokemon.is_legendary == 'True'%}
+            {% if pokemon.is_legendary%}
             <p>Legendary!</p>
             {% endif %}
             <!-- <p>{{pokemon.url}}</p> -->
