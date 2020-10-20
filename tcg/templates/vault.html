@@ -1,10 +1,16 @@
 {% extends 'base/base.html' %} {%block content%}
 <div class="grid">
     {% for pokemon in all_pokemon %}
-    <div class="grid-card" style="width: 18rem;">
+    <div class="grid-card" style="width: 18rem; background-color: {{pokemon.color}};">
         <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
         <div class="card-body">
             <h5 class="card-title">{{pokemon.name |title}}</h5>
+            <p>{{pokemon.weight}}</p>
+            <p> {{pokemon.type}}</p>
+            <p>{{pokemon.color}}</p>
+            <p>{{pokemon.species}}</p>
+            <p></p>
+            <!-- <p>{{pokemon.url}}</p> -->
         </div>
     </div>
     {% endfor %}
