@@ -29,6 +29,7 @@ class Pokemon(models.Model):
     weight = IntegerField()
     img_url = URLField()
     species = ForeignKey(Species, on_delete=models.CASCADE)
+    is_legendary = BooleanField()
 
 
 class Offer(models.Model):
