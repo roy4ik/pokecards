@@ -15,7 +15,9 @@
 ###### Fixed image in navbar to all views
 
 ### api and cards
-###### get and find api
+###### get and find api pokeapi
+###### build models
+###### find right endpoints for model data
 ###### build card view
 ###### build all cards view
 ###### build user deck with random and shuffle but fair
