@@ -2,6 +2,8 @@
 **vm
 **env/
 **.vscode/
+*launch.json
+*settings.json
 
 # ignore pycache
 **__pycache__/
