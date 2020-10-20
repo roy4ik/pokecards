@@ -61,7 +61,11 @@ def vault_new(request):
                 pokemon_number -=1
             print("Connection Error - trying again")
             continue
-            
+        except TypeError:
+            if pokemon_number > 0:
+                pokemon_number -=1
+            print("Connection Error - trying again")
+            continue
         legendary = species['is_legendary']
         legendary_counter = 0
 
