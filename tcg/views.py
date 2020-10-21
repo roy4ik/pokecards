@@ -9,6 +9,18 @@ import random
 from .models import Pokemon, Color, Type, Species, Vault
 
 #  functions
+
+def get_user_vault(request):
+    user_vault = Vault.objects.get(user=request.user)
+
+    return user_vault
+
+def shuffle_return7(request):
+    deck = list(get_user_vault(request).pokemons.all())
+    print(f"{deck}\n\n")
+    random.shuffle(deck)
+    return deck[0:7]
+
 def get_card_data(pokemon,species):
     '''
     gets card details from the db or the api and returns it in dict
@@ -97,7 +109,7 @@ def all_cards(request):
 def vault_new(request):
     context = {}
     user_deck = []
-    user_vault = Vault.objects.get(user=request.user)
+    user_vault = get_user_vault(request)
     # 60 cards in a deck
     for pokemon_number in range(60):
         # get random card 
@@ -146,9 +158,17 @@ def vault_new(request):
 
 def vault(request):
     context = {}
-    user_vault = Vault.objects.get(user=request.user).pokemons.all()
+    user_vault = get_user_vault(request).pokemons.all()
     context.update({
         'user_vault': user_vault
     })
     return render(request, 'vault.html', context)
     
+
+def trade_select(request):
+    context = {}
+    shuffled_deck = shuffle_return7(request)
+    context.update({
+        'shuffled_deck': shuffled_deck
+    })
+    return render(request, 'trade_select.html', context)

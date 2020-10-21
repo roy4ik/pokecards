@@ -34,14 +34,18 @@ class Pokemon(models.Model):
 class Offer(models.Model):
     pokemons = ManyToManyField(Pokemon)
 
+class Counter_Offer(models.Model):
+    pokemons = ManyToManyField(Pokemon)
     
 class Trades(models.Model):
     users = ManyToManyField(User)
-    offer = ForeignKey(Offer,on_delete=models.PROTECT,null=True)
+    offer = ForeignKey(Counter_Offer,on_delete=models.PROTECT,null=True)
+    counter_offer = ForeignKey(Offer,on_delete=models.PROTECT,null=True)
     date_created = DateField(auto_now_add=True)
     date_completed = DateField(auto_now=True)
-    completed = BooleanField()
-    retracted = BooleanField()
+    completed = BooleanField(default=False)
+    retracted = BooleanField(default=False)
+    public = BooleanField(default=False)
 
 
 class Vault(models.Model):
