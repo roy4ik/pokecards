@@ -1,9 +1,10 @@
 {% extends 'base/base.html' %} {%block content%}
-<form method='Post'>
+<form method='Post' action="/tcg/trade_offer_made">
+    {% csrf_token %}}
     <div class="grid">
         {% for pokemon in shuffled_deck %}
-        <input type="checkbox" class="checkbox-card" value="{{pokemon.name}}">
-        <label for="{{pokemon.name}}">
+        <input type="checkbox" class="checkbox-card" value="pokemon_{{pokemon.name}}">
+        <label for="pokemon_{{pokemon.name}}">
             <div class="grid-card" style="width: 14rem; background-color: {{pokemon.species.color.name}};">
                 <img class="card-img-top" src="{{pokemon.img_url}}" alt="couldn't find image">
                 <div class="card-body">
@@ -20,7 +21,8 @@
             </div>
         </label> {% endfor %}
     </div>
-    <input type="submit" class="button btn-primary" value="submit public offer">
-    <input type="submit" class="button btn-primary" value="submit private offer">
+    <input type="checkbox" class="checkbox-card" value="public">
+    <label for="public">Public</label>
+    <input type="submit" class="button btn-primary" value="Submit offer">
 </form>
 {% endblock %}

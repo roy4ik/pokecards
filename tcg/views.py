@@ -1,13 +1,11 @@
-from django.http.response import HttpResponseBadRequest
+from django.http.request import HttpRequest
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
-from requests import status_codes
-from accounts.models import Profile
 from .import tcg
 import json
 import requests
 import random
-from .models import Pokemon, Color, Type, Species, Vault
+from .models import Pokemon, Color, Type, Species, Vault, Trades
 
 #  functions
 
@@ -92,4 +90,8 @@ def trade_select(request):
     context.update({
         'shuffled_deck': shuffled_deck
     })
-    return render(request, 'trade_select.html', context)
+    return render(request, 'forms/trade_select.html', context)
+
+def trade_offer_made(request):
+    form = request.body
+    print(form)
