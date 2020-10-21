@@ -39,8 +39,8 @@ class Counter_Offer(models.Model):
     
 class Trades(models.Model):
     users = ManyToManyField(User)
-    offer = ForeignKey(Counter_Offer,on_delete=models.PROTECT,null=True)
-    counter_offer = ForeignKey(Offer,on_delete=models.PROTECT,null=True)
+    offer = models.OneToOneField(Counter_Offer,on_delete=models.PROTECT,null=True)
+    counter_offer = models.OneToOneField(Offer,on_delete=models.PROTECT,null=True)
     date_created = DateField(auto_now_add=True)
     date_completed = DateField(auto_now=True)
     completed = BooleanField(default=False)
@@ -58,3 +58,14 @@ class Vault(models.Model):
 def create_vault(sender, created, instance, **kwargs):
     if created:
         profile = Vault.objects.create(user=instance)
+
+
+@receiver(post_save, sender=Trades)
+def create_vault(sender, created, instance, **kwargs):
+    if created:
+        profile = Offer.objects.create(trades=instance)
+
+@receiver(post_save, sender=Trades)
+def create_vault(sender, created, instance, **kwargs):
+    if created:
+        profile = Counter_Offer.objects.create(trades=instance)
