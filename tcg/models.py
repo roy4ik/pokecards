@@ -47,8 +47,7 @@ class Trades(models.Model):
 class Vault(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
     pokemons = models.ManyToManyField(Pokemon)
-    pokemons = models.ManyToManyField(Pokemon)
-    total_xp = IntegerField()
+    total_xp = IntegerField(null=True)
 
 
 @receiver(post_save, sender=User)

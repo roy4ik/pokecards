@@ -9,7 +9,7 @@
     <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}{% load widget_tweaks %}
         <img src="../../media/{{user.profile.image}}" alt='User image' width='200' height='200' style='border: solid 3px white;'> {{form.image}}
-        <input class="user-info-input btn" class="btn" type="submit" value="Save">
+        <input class="user-info-input btn-success" class="btn" type="submit" value="Save">
     </form>
 </div>
 {%endif%} {%endblock%}

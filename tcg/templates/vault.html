@@ -1,14 +1,13 @@
 {% extends 'base/base.html' %} {%block content%}
 <div class="grid">
-    {% for pokemon in user_deck %}
-    <div class="grid-card" style="width: 14rem; background-color: {{pokemon.color}};">
-        <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
+    {% for pokemon in user_vault %}
+    <div class="grid-card" style="width: 14rem; background-color: {{pokemon.species.color.name}};">
+        <img class="card-img-top" src="{{pokemon.img_url}}" alt="couldn't find image">
         <div class="card-body">
             <h5 class="card-title">{{pokemon.name |title}}</h5>
             <p>{{pokemon.weight}}</p>
-            <p> {{pokemon.type}}</p>
-            <p>{{pokemon.color}}</p>
-            <p>{{pokemon.species}}</p>
+            <p> {{pokemon.type.name|title}}</p>
+            <p>{{pokemon.species.name|title}}</p>
             {% if pokemon.is_legendary == 'True'%}
             <p>Legendary!</p>
             {% endif %}
