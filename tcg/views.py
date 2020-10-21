@@ -146,7 +146,7 @@ def vault_new(request):
 
 def vault(request):
     context = {}
-    user_vault = Vault.objects.get(user=request.user).pokemons_set.all()
+    user_vault = Vault.objects.get(user=request.user).pokemons.all()
     context.update({
         'user_vault': user_vault
     })
