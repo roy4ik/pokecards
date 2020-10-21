@@ -1,3 +1,11 @@
+input[type=checkbox]:checked {
+    display: none !important
+}
+
+input[type=checkbox]:checked {
+    display: none !important
+}
+
 body {
     margin: 0;
 }
@@ -23,3 +31,5 @@ main {
 .card-body {
     min-height: 240px;
 }
+
+.checkbox-card {}

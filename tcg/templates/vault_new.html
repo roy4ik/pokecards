@@ -5,10 +5,10 @@
         <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
         <div class="card-body bg-light">
             <h5 class="card-title">{{pokemon.name |title}}</h5>
-            <p>{{pokemon.weight}}</p>
-            <p> {{pokemon.type}}</p>
-            <p>{{pokemon.base_experience}}</p>
-            <p>{{pokemon.species}}</p>
+            <p>Base XP: {{pokemon.base_experience}}</p>
+            <p>Type: {{pokemon.type|title}}</p>
+            <p>Species: {{pokemon.species}}</p>
+            <p>Weight: {{pokemon.weight}}</p>
             {% if pokemon.is_legendary%}
             <p>Legendary!</p>
             {% endif %}
