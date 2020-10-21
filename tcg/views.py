@@ -103,7 +103,7 @@ def vault_new(request):
         # get random card 
         pokeapi_url = f'https://pokeapi.co/api/v2/pokemon/{random.randint(1,893)}'
         # set max connections
-        max_connections = 100
+        max_connections = 200
         try:
             print(pokeapi_url)
             pokemon = requests.get(pokeapi_url).json()
