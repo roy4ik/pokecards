@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %} {%block content%}
 <div class="grid">
-    {% for pokemon in user_deck %}
+    {% for pokemon in user_vault %}
     <div class="grid-card" style="width: 14rem; background-color: {{pokemon.color}};">
         <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
         <div class="card-body">

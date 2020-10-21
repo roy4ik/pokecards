@@ -15,13 +15,14 @@
 ###### Fixed image in navbar to all views
 
 ### api and cards
-###### get and find api pokeapi
-###### build models
-###### find right endpoints for model data
-###### build card view
-###### build all cards view
-###### build user deck with random and shuffle but fair
-
+###### get and find api pokeapi - done
+###### build models - done
+###### find right endpoints for model data - done
+###### build card view -done
+###### build all cards view -done - todo - include pulling local db cards for speed
+###### build user deck with random cards, max 10 legendary cards per player - done
+###### build shuffle random but fair for trading rounds
+###### 
 
 
 
