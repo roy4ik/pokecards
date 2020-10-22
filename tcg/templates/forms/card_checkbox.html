@@ -8,7 +8,7 @@
         {% else %}
         <div class="card-body">
             {% endif %}
-            <h5 class="card-title">{{pokemon.choice_value|title}}</h5>
+            <h5 class="card-title">{{pokemon.choice.name|title}}</h5>
             <p>Base XP: {{pokemon.base_experience}}</p>
             <p>Type: {{pokemon.type.name|title}}</p>
             <p>Species: {{pokemon.species.name|title}}</p>
