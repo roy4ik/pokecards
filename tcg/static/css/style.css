@@ -1,10 +1,84 @@
-input[type=checkbox] {
-    display: none !important
+.grid input[type=checkbox] {
+    display: none;
+    transition: 0.5s;
 }
 
-input[type=checkbox]:checked .card-body {
-    display: none !important;
-    border: 3px solid blue;
+#field_id_public input[type=checkbox],
+p {
+    display: inline-block;
+}
+
+input[type=checkbox]:checked~#grid_card_0 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_1 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_2 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_3 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_4 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_5 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_6 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+input[type=checkbox]:checked~#grid_card_7 {
+    border-radius: 15px;
+    border: 15px solid green;
+    width: 16em;
+    background-color: green;
+    transition: 0.5s;
+}
+
+#field_id_public {
+    border-radius: 4px;
+    height: 4em;
+    width: 20em;
+    margin-left: 1em;
+    padding: 1em;
+    background-color: white;
 }
 
 body {
@@ -31,6 +105,7 @@ main {
     display: grid;
     grid-gap: 6em;
     grid-template-columns: repeat( auto-fit, minmax(150px, 2fr));
+    margin-bottom: 3em;
 }
 
 .grid-card {

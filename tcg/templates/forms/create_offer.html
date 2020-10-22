@@ -1,10 +1,18 @@
 {% extends 'base/base.html' %} {%block content%}
+<h3 style="color:white; text-align:center; margin-bottom: 1.5em;">Select what you want to offer</h3>
 <form method='Post'>
     <div class="grid">
         {% csrf_token %} {% for mci, name in form.cards.field.widget.choices %}
-        <label for="id_cards_{{forloop.counter0}}"><input type="checkbox" name="cards" value="{{mci}}" id="id_cards_{{forloop.counter0}}">{% include 'partials/card.html' with pokemon=mci.instance %}</label> {% endfor %}
+        <label for="id_cards_{{forloop.counter0}}"><input type="checkbox" name="cards" value="{{mci}}" id="id_cards_{{forloop.counter0}}">
+            <div id=grid_card_{{forloop.counter0}}>{% include 'partials/card.html' with pokemon=mci.instance %}</div></label> {% endfor %}
     </div>
-    <div style="color:white">Make this publicly available{{form.public}}</div>
-    <input type="submit" class="button btn-primary" value="Submit offer">
+    <div class="d-flex justify-content-around">
+
+        <div id="field_id_public">
+            {{form.public}}
+            <p>Make offer publicly available</p>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit offer">
+    </div>
 </form>
 {%endblock content%}
