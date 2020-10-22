@@ -16,8 +16,9 @@ class TradeOffer(forms.ModelForm):
 
 class CounterOfferForm(forms.ModelForm):
      class Meta:
-        model = Trade
-        fields = ['cards','public']
+        model = Counter_Offer
+        fields = ['cards']
         widgets = {
             'cards': CardWidget()
         }
+        

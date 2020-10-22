@@ -119,7 +119,7 @@ class CreateOffer(CreateView):
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
-        return reverse('tcg.views.Trade', args=[str(self.id)])
+        return reverse('tcg.views.TradeDetail', args=[str(self.pk)])
 
     def get_context_data(self, **kwargs):
         context = super(CreateCounterOffer,self).get_context_data(**kwargs)
@@ -129,8 +129,8 @@ class CreateCounterOffer(CreateView):
         return context
         
     def form_valid(self, form):
-        self.object.trade = self.get_absolute_url
         self.object = form.save(commit=False)
+        self.object.trade = self.get_absolute_url
         self.object.creator = self.request.user
         self.object.save()
 
@@ -140,6 +140,6 @@ class CreateCounterOffer(CreateView):
     model = Counter_Offer
     form_class = CounterOfferForm
     template_name = 'forms/create_offer.html'
-    success_url = 'vault'
+    success_url = ''
     failed_message = "The user couldn't create Trade"
 
