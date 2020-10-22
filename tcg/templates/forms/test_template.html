@@ -1,0 +1,5 @@
+<ul id="id_cards">
+    {% for mci, name in form.cards.field.widget.choices %}
+    <li><label for="id_cards_{{forloop.counter0}}"><input type="checkbox" name="cards" value="{{mci}}" id="id_cards_{{forloop.counter0}}">{% include 'partials/card.html' with pokemon=mci.instance %}</label></li>
+    {% endfor %}
+</ul>

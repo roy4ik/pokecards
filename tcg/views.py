@@ -1,13 +1,15 @@
-from django.http.response import HttpResponseBadRequest
+from typing import Counter
+from django.http.request import HttpRequest
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
-from requests import status_codes
-from accounts.models import Profile
-from .import tcg
+from django.views.generic import CreateView, UpdateView
 import json
 import requests
 import random
-from .models import Pokemon, Color, Type, Species, Vault
+from . import tcg
+from tcg.forms import *
+from .models import Pokemon, Color, Type, Species, Vault, Trade
 
 #  functions
 
@@ -30,7 +32,7 @@ def all_cards(request):
 def vault_new(request):
     context = {}
     user_deck = []
-    user_vault = tcg.get_user_vault(request)
+    user_vault = request.user.vault
     # 60 cards in a deck
     for pokemon_number in range(60):
         # get random card 
@@ -77,13 +79,9 @@ def vault_new(request):
     print("user deck initialized")
     return "Success"
 
+
 def vault(request):
-    context = {}
-    user_vault = tcg.get_user_vault(request).pokemons.all()
-    context.update({
-        'user_vault': user_vault
-    })
-    return render(request, 'vault.html', context)
+    return render(request, 'vault.html')
     
 
 def trade_select(request):
@@ -92,4 +90,28 @@ def trade_select(request):
     context.update({
         'shuffled_deck': shuffled_deck
     })
-    return render(request, 'trade_select.html', context)
+    return render(request, 'forms/trade_select.html', context)
+
+class Create_offer(CreateView):
+    def get_context_data(self, **kwargs):
+        context = super(Create_offer,self).get_context_data(**kwargs)
+        form = Trade_offer()
+        form.fields['cards'].queryset = shuffle_return7(self.request)
+        print(shuffle_return7(self.request))
+        context['form'] = form
+        return context
+        
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+    model = Trade
+    form_class = Trade_offer
+    template_name = 'forms/create_offer.html'
+    success_url = 'vault'
+    failed_message = "The user couldn't create Trade"
+

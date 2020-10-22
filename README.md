@@ -19,11 +19,14 @@
 ###### build models - done
 ###### find right endpoints for model data - done
 ###### build card view -done
-###### build all cards view -done - todo - include pulling local db cards for speed
-###### build user deck with random cards, max 10 legendary cards per player - done
-###### build shuffle random but fair for trading rounds
-###### 
-
+###### build all cards view -done
+###### build user deck with random cards, max 5 legendary cards per player - done
+###### build shuffle random but fair for trading rounds - done
+###### build trade offer selector form
+###### create function to save trade offer
+###### enable market view for public offers
+###### create counter-offer selector based on trade offer
+###### create trade function
 
 
 ### UI/UX
