@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %} {%block content%}
+<div class="trade-detail">
+    <h4>{{object.id}}</h4>
+    <h3>{{object.date_created}}</h3>
+    {% if object.date_completed %}
+    <h3>{{object.date_completed}}</h3>
+    {%endif%}
+    <h3>Status</h3>
+    {{object.status.get_status_choices_display}}
+    <h2>{{object.creator.first_name}} {{object.creator.last_name}}</h2>
+</div>
+<div class="grid">
+    {% for pokemon in object.cards.all %} {% include 'partials/card.html' %} {% endfor %}
+</div>
+{% endblock %}

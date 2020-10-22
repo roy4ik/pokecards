@@ -1,5 +1,13 @@
-{% block content %}
-<div>
-    {{}}
+{% extends 'base/base.html' %} {%block content%}
+
+<div class="grid">
+    {% for pokemon in all_pokemon %}
+    <div class="grid-card">
+        <img class="card-img-top" src={{pokemon.img}} alt="couldn't find image">
+        <div class="card-body">
+            <h5 class="card-title">{{pokemon.name |title}}</h5>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
