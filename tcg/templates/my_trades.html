@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %} {%block content%}
+{% extends 'base/base.html' %} {%block content%} {% for object in object_list %}
 <div class="trade-detail">
     <h2>Trade Details:</h2>
     <h2>Created by: {{object.creator.first_name}} {{object.creator.last_name}}</h2>
@@ -12,4 +12,4 @@
 <h2 class="trade-detail">Offered:</h2>
 <div class="grid">{% for pokemon in object.cards.all %}{% include 'partials/card.html' %} {% endfor %}</div> {% if not user == object.creator %}
 <a class="btn btn-primary" href="{% url 'counter_offer' pk=object.id %}">Create Counter Offer</a> {%endif%}
-<a class="btn btn-primary" href="{%url 'mytrades'%}">Back</a> {% endblock %}
+<a class="btn btn-primary" href="{% url 'trade' pk=object.id %}">View Details</a> {% endfor %}{% endblock %}
