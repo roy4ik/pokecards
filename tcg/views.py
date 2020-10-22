@@ -2,6 +2,7 @@ from typing import Counter
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView
 import json
@@ -117,6 +118,9 @@ class CreateOffer(CreateView):
 
 
 class CreateCounterOffer(CreateView):
+    def get_absolute_url(self):
+        return reverse('tcg.views.Trade', args=[str(self.id)])
+
     def get_context_data(self, **kwargs):
         context = super(CreateCounterOffer,self).get_context_data(**kwargs)
         form = CounterOfferForm()
@@ -125,6 +129,7 @@ class CreateCounterOffer(CreateView):
         return context
         
     def form_valid(self, form):
+        self.object.trade = self.get_absolute_url
         self.object = form.save(commit=False)
         self.object.creator = self.request.user
         self.object.save()
