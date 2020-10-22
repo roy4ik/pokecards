@@ -6,10 +6,19 @@ from .tcg import shuffle_return7
 class CardWidget(forms.CheckboxSelectMultiple):
     template_name='forms/test_template.html'
 
-class Trade_offer(forms.ModelForm):
+class TradeOffer(forms.ModelForm):
     class Meta:
         model = Trade
         fields = ['cards','public']
         widgets = {
             'cards': CardWidget()
         }
+
+class CounterOfferForm(forms.ModelForm):
+     class Meta:
+        model = Counter_Offer
+        fields = ['cards']
+        widgets = {
+            'cards': CardWidget()
+        }
+        

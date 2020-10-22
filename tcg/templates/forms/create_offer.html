@@ -7,11 +7,12 @@
             <div id=grid_card_{{forloop.counter0}}>{% include 'partials/card.html' with pokemon=mci.instance %}</div></label> {% endfor %}
     </div>
     <div class="d-flex justify-content-around">
-
+        {% if form.public %}
         <div id="field_id_public">
             {{form.public}}
             <p>Make offer publicly available</p>
         </div>
+        {% endif %}
         <input type="submit" class="btn btn-primary" value="Submit offer">
     </div>
 </form>
