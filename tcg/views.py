@@ -115,7 +115,10 @@ class CreateOffer(CreateView):
     success_url = 'vault'
     failed_message = "The user couldn't create Trade"
 
-
+class TradeDetailView(DetailView):
+    model = Trade
+    template_name= 'trade_details.html'
+    
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):

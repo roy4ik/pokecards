@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %} {%block content%}
+<div class="trade-detail">
+    <h2>Trade Details:</h2>
+    <h2>Created by: {{object.creator.first_name}} {{object.creator.last_name}}</h2>
+    <h3>Date Created: {{object.date_created}}</h3>
+    {% if object.date_completed %}
+    <h3>Date Completed: {{object.date_completed}}</h3>
+    {%endif%}
+    <h3>Status</h3>
+    {{object.status.get_status_display}}
+</div>
+<h2 class="trade-detail">Offered:</h2>
+<div class="grid">{% for pokemon in object.cards.all %}{% include 'partials/card.html' %} {% endfor %}</div> {% if not user == object.creator %}
+<a class="btn btn-primary" href="{% url 'counter_offer' pk=object.id %}">Create Counter Offer</a> {%endif%} {% endblock %}
