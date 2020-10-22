@@ -4,7 +4,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 import json
 import requests
 import random
@@ -118,7 +118,11 @@ class CreateOffer(CreateView):
 class TradeDetailView(DetailView):
     model = Trade
     template_name= 'trade_details.html'
-    
+
+class MyTrades(ListView):
+    model = Trade
+    template_name= 'my_trades.html'
+    paginate_by = 100
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
