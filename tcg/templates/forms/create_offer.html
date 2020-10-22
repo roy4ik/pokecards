@@ -1,0 +1,5 @@
+{% extends 'base/base.html' %} {%block content%}
+<form method='Post'>
+    {% csrf_token %} {{form}} {% for field in form %} {% endfor %}
+</form>
+{%endblock content%}

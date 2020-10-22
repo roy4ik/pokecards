@@ -1,15 +1,16 @@
 import random
 from . import views
 #functions for tcg views
-def get_user_vault(request):
-    user_vault = views.Vault.objects.get(user=request.user)
+# def get_user_vault(request):
+#     user_vault = views.Vault.objects.get(user=request.user)
 
-    return user_vault
+#     return user_vault
 
 def shuffle_return7(request):
-    deck = list(get_user_vault(request).pokemons.all())
+    deck = list(request.user.vault.pokemons.all())
     random.shuffle(deck)
-    return deck[0:7]
+    qs = request.user.vault.pokemons.filter(id__in=[card.id for card in deck[0:7]])
+    return qs
 
 def get_card_data(pokemon,species):
     '''

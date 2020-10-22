@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import BooleanField, CharField, DateField, IntegerField, URLField
@@ -31,21 +32,20 @@ class Pokemon(models.Model):
     is_legendary = BooleanField(null =True)
 
 
-class Offer(models.Model):
-    pokemons = ManyToManyField(Pokemon)
-
 class Counter_Offer(models.Model):
     pokemons = ManyToManyField(Pokemon)
-    
-class Trades(models.Model):
-    users = ManyToManyField(User)
-    offer = models.OneToOneField(Counter_Offer,on_delete=models.PROTECT,null=True)
-    counter_offer = models.OneToOneField(Offer,on_delete=models.PROTECT,null=True)
+    trade = models.ForeignKey('Trade',on_delete=models.PROTECT,null=True)
+    creator = ForeignKey(User, on_delete=models.CASCADE)
+
+class Trade(models.Model):
+    CHOICES=[('a', 'acceppted'),('p','pending'),('c','closed')]
     date_created = DateField(auto_now_add=True)
-    date_completed = DateField(auto_now=True)
-    completed = BooleanField(default=False)
-    retracted = BooleanField(default=False)
+    date_completed = DateField(null=True)
+    status = CharField(max_length=1, choices=CHOICES, default='p')
     public = BooleanField(default=False)
+    cards = ManyToManyField(Pokemon)
+    creator = ForeignKey(User, on_delete=models.CASCADE)
+
 
 
 class Vault(models.Model):
@@ -60,12 +60,12 @@ def create_vault(sender, created, instance, **kwargs):
         profile = Vault.objects.create(user=instance)
 
 
-@receiver(post_save, sender=Trades)
+@receiver(post_save, sender=Trade)
 def create_vault(sender, created, instance, **kwargs):
     if created:
-        profile = Offer.objects.create(trades=instance)
+        profile = Offer.objects.create(trade=instance)
 
-@receiver(post_save, sender=Trades)
+@receiver(post_save, sender=Trade)
 def create_vault(sender, created, instance, **kwargs):
     if created:
-        profile = Counter_Offer.objects.create(trades=instance)
+        profile = Counter_Offer.objects.create(trade=instance)
