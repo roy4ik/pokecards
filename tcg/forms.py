@@ -13,3 +13,4 @@ class Trade_offer(forms.ModelForm):
         widgets = {
             'cards': CardWidget()
         }
+

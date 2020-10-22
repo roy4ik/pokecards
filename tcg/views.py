@@ -97,7 +97,6 @@ class Create_offer(CreateView):
         context = super(Create_offer,self).get_context_data(**kwargs)
         form = Trade_offer()
         form.fields['cards'].queryset = shuffle_return7(self.request)
-        print(shuffle_return7(self.request))
         context['form'] = form
         return context
         
@@ -114,4 +113,5 @@ class Create_offer(CreateView):
     template_name = 'forms/create_offer.html'
     success_url = 'vault'
     failed_message = "The user couldn't create Trade"
+
 

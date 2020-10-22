@@ -58,14 +58,3 @@ class Vault(models.Model):
 def create_vault(sender, created, instance, **kwargs):
     if created:
         profile = Vault.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Trade)
-def create_vault(sender, created, instance, **kwargs):
-    if created:
-        profile = Offer.objects.create(trade=instance)
-
-@receiver(post_save, sender=Trade)
-def create_vault(sender, created, instance, **kwargs):
-    if created:
-        profile = Counter_Offer.objects.create(trade=instance)
