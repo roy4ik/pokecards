@@ -33,7 +33,7 @@ class Pokemon(models.Model):
 
 
 class Counter_Offer(models.Model):
-    pokemons = ManyToManyField(Pokemon)
+    cards = ManyToManyField(Pokemon)
     trade = models.ForeignKey('Trade',on_delete=models.PROTECT,null=True)
     creator = ForeignKey(User, on_delete=models.CASCADE)
 

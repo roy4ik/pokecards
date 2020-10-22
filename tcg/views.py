@@ -92,10 +92,10 @@ def trade_select(request):
     })
     return render(request, 'forms/trade_select.html', context)
 
-class Create_offer(CreateView):
+class CreateOffer(CreateView):
     def get_context_data(self, **kwargs):
-        context = super(Create_offer,self).get_context_data(**kwargs)
-        form = Trade_offer()
+        context = super(CreateOffer,self).get_context_data(**kwargs)
+        form = TradeOffer()
         form.fields['cards'].queryset = shuffle_return7(self.request)
         context['form'] = form
         return context
@@ -109,9 +109,32 @@ class Create_offer(CreateView):
 
 
     model = Trade
-    form_class = Trade_offer
+    form_class = TradeOffer
     template_name = 'forms/create_offer.html'
     success_url = 'vault'
     failed_message = "The user couldn't create Trade"
 
+
+
+class CreateCounterOffer(CreateView):
+    def get_context_data(self, **kwargs):
+        context = super(CreateCounterOffer,self).get_context_data(**kwargs)
+        form = CounterOfferForm()
+        form.fields['cards'].queryset = shuffle_return7(self.request)
+        context['form'] = form
+        return context
+        
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.creator = self.request.user
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+    model = Counter_Offer
+    form_class = CounterOfferForm
+    template_name = 'forms/create_offer.html'
+    success_url = 'vault'
+    failed_message = "The user couldn't create Trade"
 
