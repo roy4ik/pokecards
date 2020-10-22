@@ -12,4 +12,4 @@
 <h2 class="trade-detail">Offered:</h2>
 <div class="grid">{% for pokemon in object.cards.all %}{% include 'partials/card.html' %} {% endfor %}</div> {% if not user == object.creator %}
 <a class="btn btn-primary" href="{% url 'counter_offer' pk=object.id %}">Create Counter Offer</a> {%endif%}
-<a class="btn btn-primary" href="javascript:history.go(1)">Back</a> {% endblock %}
+<a class="btn btn-primary" href="{%url 'mytrades'%}">Back</a> {% endblock %}
