@@ -11,6 +11,7 @@ def shuffle_return7(request):
     random.shuffle(deck)
     qs = request.user.vault.pokemons.filter(id__in=[card.id for card in deck[0:7]])
     return qs
+    
 
 def get_card_data(pokemon,species):
     '''

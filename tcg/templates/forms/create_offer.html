@@ -1,5 +1,9 @@
 {% extends 'base/base.html' %} {%block content%}
 <form method='Post'>
-    {% csrf_token %} {{form}} {% for field in form %} {% endfor %}
+    <div>
+        {% csrf_token %} {% for pokemon in form.cards %} {% include 'forms/card_checkbox.html' %} {% endfor %}
+    </div>
+    <div style="color:white">Make this publicly available{{form.public}}</div>
+    <input type="submit" class="button btn-primary" value="Submit offer">
 </form>
 {%endblock content%}

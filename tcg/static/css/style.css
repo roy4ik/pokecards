@@ -1,9 +1,11 @@
-input[type=checkbox]:checked {
+input[type=checkbox] {
     display: none !important
 }
 
-input[type=checkbox]:checked {
-    display: none !important
+input[type=checkbox]:checked,
+card-body {
+    display: none !important;
+    border: 3px solid blue;
 }
 
 body {

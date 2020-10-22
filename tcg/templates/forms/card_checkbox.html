@@ -1,0 +1,23 @@
+<label class=card-checkbox for='{{pokemon.id_for_label}}'>
+    <div class='tag' style="visibility:hidden;">{{pokemon.tag}}</div>
+<div class="grid-card" style="background-color: {{pokemon.species.color.name}};">
+    <div class="grid-card" style="background-color: {{pokemon.species.color.name}};" checked="unchecked">
+
+    <img class="card-img-top" src="{{pokemon.img_url}}" alt="couldn't find image"> {% if pokemon.is_legendary%}
+    <div class="card-body legendary">
+        {% else %}
+        <div class="card-body">
+            {% endif %}
+            <h5 class="card-title">{{pokemon.choice_value|title}}</h5>
+            <p>Base XP: {{pokemon.base_experience}}</p>
+            <p>Type: {{pokemon.type.name|title}}</p>
+            <p>Species: {{pokemon.species.name|title}}</p>
+            <p>Weight: {{pokemon.weight}}</p>
+            {% if pokemon.is_legendary%}
+            <h5>Legendary!</h5>
+            {% endif %}
+            <!-- <p>{{pokemon.url}}</p> -->
+        </div>
+    </div>
+</div>
+</label>
