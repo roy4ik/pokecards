@@ -4,7 +4,7 @@ from .models import Trade, Vault, Counter_Offer
 from .tcg import shuffle_return7
 
 class CardWidget(forms.CheckboxSelectMultiple):
-    template_name='forms/create_offer.html'
+    template_name='forms/test_template.html'
 
 class TradeOffer(forms.ModelForm):
     class Meta:
