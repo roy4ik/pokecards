@@ -31,9 +31,9 @@ class SignUp(CreateView):
         return redirect(reverse(self.get_success_url()))
 
 
-def signUp_complete(request):
-    vault_new(request)
-    return render (request, 'registration/signUp_complete.html')
+# def signUp_complete(request):
+#     vault_new(request)
+#     return render (request, 'registration/signUp_complete.html')
 
 class ProfileUpdate(UpdateView):
     model = Profile
