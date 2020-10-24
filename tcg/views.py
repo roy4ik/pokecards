@@ -44,7 +44,7 @@ def vault_new(request):
         try:
             print(pokeapi_url)
             pokemon = requests.get(pokeapi_url).json()
-            tcg.is_in_db(pokemon['name'])
+            tcg_functions.is_in_db(pokemon['name'])
             species = requests.get(pokemon['species']['url']).json()
         except requests.HTTPError:
             if pokemon_number > 0 and max_connections > 0:
@@ -65,14 +65,14 @@ def vault_new(request):
         # check if legendary card - max 5 per user
         if legendary == True and legendary_counter < 5:
             legendary_counter += 1
-            user_deck.append(tcg.get_card_data(pokemon,species))
+            user_deck.append(tcg_functions.get_card_data(pokemon,species))
             # add to user's vault
-            user_vault.pokemons.add(tcg.get_card_data(pokemon,species))
+            user_vault.pokemons.add(tcg_functions.get_card_data(pokemon,species))
             print("adding legendary card")
         elif legendary == False:
-            user_deck.append(tcg.get_card_data(pokemon,species))
+            user_deck.append(tcg_functions.get_card_data(pokemon,species))
             # add to user's vault
-            user_vault.pokemons.add(tcg.get_card_data(pokemon,species))
+            user_vault.pokemons.add(tcg_functions.get_card_data(pokemon,species))
             print('adding regular card')
         
         print(f"loading new deck : {'{:.2f}'.format(pokemon_number/60*100)}%")
@@ -88,7 +88,7 @@ def vault(request):
 
 def trade_select(request):
     context = {}
-    shuffled_deck = tcg.shuffle_return7(request)
+    shuffled_deck = tcg_functions.shuffle_return7(request)
     context.update({
         'shuffled_deck': shuffled_deck
     })

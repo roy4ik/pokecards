@@ -1,6 +1,6 @@
 import random
-from . import views
 import requests
+from . import models
 
 def vault_new(vault):
     # 60 cards in a deck
@@ -63,7 +63,7 @@ def get_card_data(pokemon,species):
         api_card = get_card_api(pokemon,species)
         card = add_card(api_card)
     else:
-        card = views.models.Pokemon.objects.get(name=pokemon['name'])
+        card = models.Pokemon.objects.get(name=pokemon['name'])
     return card
 
 
@@ -95,16 +95,16 @@ def add_card(card):
     #returns: pokemon obj.
     """
     # adding color
-    color, created = views.models.Color.objects.get_or_create(name=card['color'])
+    color, created = models.Color.objects.get_or_create(name=card['color'])
     print("type got created in db")
     #  adding Type
-    type, created = views.models.Type.objects.get_or_create(name=card['type'])
+    type, created = models.Type.objects.get_or_create(name=card['type'])
     print("type got created in db")
     #  adding Species
-    species, created = views.models.Species.objects.get_or_create(name=card['name'], color=color, type=type)
+    species, created = models.Species.objects.get_or_create(name=card['name'], color=color, type=type)
     print("species got created in db")
     #   adding Pokemon
-    pokemon, created = views.models.Pokemon.objects.get_or_create(name=card['name'], base_experience=card['base_experience'], weight=card['weight'], img_url=card['img'], species= species, is_legendary = card['is_legendary'])
+    pokemon, created = models.Pokemon.objects.get_or_create(name=card['name'], base_experience=card['base_experience'], weight=card['weight'], img_url=card['img'], species= species, is_legendary = card['is_legendary'])
     print("pokemon got created in db")
     return pokemon
 
@@ -116,7 +116,7 @@ def is_in_db(pokemon_name):
     #returns: returns bool
     """
     try:
-        in_db = views.models.Pokemon.objects.get(name=pokemon_name)
+        in_db = models.Pokemon.objects.get(name=pokemon_name)
         return True
     except:
         return False

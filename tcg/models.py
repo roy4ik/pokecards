@@ -58,4 +58,7 @@ class Vault(models.Model):
 def create_vault(sender, created, instance, **kwargs):
     if created:
         vault = Vault.objects.create(user=instance)
+        vault_new(vault)
 
+
+    
