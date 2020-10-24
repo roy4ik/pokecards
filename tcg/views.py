@@ -131,15 +131,15 @@ class MyTrades(ListView):
     template_name= 'my_trades.html'
 
     def get_queryset(self):
-        self.offers = get_object_or_404(Counter_Offer, creator=self.request.user)
-
+        self.offers = Trade.objects.filter(creator=self.request.user)
+        return self.offers
 class MyOffers(ListView): 
     model = Counter_Offer
     template_name= 'my_trades.html'
 
     def get_queryset(self):
-        self.offers = get_object_or_404(Counter_Offer, creator=self.request.user)
-
+        self.trades = Trade.objects.filter(creator=self.request.user)
+        return self.trades
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
         return reverse('tcg.views.TradeDetail', args=[str(self.pk)])
