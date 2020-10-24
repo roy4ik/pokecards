@@ -20,7 +20,7 @@ class SignUp(CreateView):
     model = User
     form_class = SignupForm
     template_name = 'registration/signUp.html'
-    success_url = 'signUp_complete'
+    success_url = 'vault'
     failed_message = "The user couldn't be created"
 
     def form_valid(self,form):
@@ -30,10 +30,6 @@ class SignUp(CreateView):
             login(self.request,user)
         return redirect(reverse(self.get_success_url()))
 
-
-def signUp_complete(request):
-    vault_new(request)
-    return render (request, 'registration/signUp_complete.html')
 
 class ProfileUpdate(UpdateView):
     model = Profile

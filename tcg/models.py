@@ -1,4 +1,5 @@
 from random import choices
+from tcg.tcg_functions import vault_new
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import BooleanField, CharField, DateField, IntegerField, URLField
@@ -57,4 +58,8 @@ class Vault(models.Model):
 @receiver(post_save, sender=User)
 def create_vault(sender, created, instance, **kwargs):
     if created:
-        profile = Vault.objects.create(user=instance)
+        vault = Vault.objects.create(user=instance)
+        vault_new(vault)
+
+
+    
