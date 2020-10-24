@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView, ListView
+from django.shortcuts import get_object_or_404
 import json
 import requests
 import random
@@ -129,11 +130,15 @@ class MyTrades(ListView):
     model = Trade
     template_name= 'my_trades.html'
 
+    def get_queryset(self):
+        self.offers = get_object_or_404(Counter_Offer, creator=self.request.user)
 
-class MyOffers(ListView):
+class MyOffers(ListView): 
     model = Counter_Offer
     template_name= 'my_trades.html'
 
+    def get_queryset(self):
+        self.offers = get_object_or_404(Counter_Offer, creator=self.request.user)
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
