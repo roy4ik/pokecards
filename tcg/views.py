@@ -133,12 +133,13 @@ class MyTrades(ListView):
     def get_queryset(self):
         self.offers = Trade.objects.filter(creator=self.request.user)
         return self.offers
+
 class MyOffers(ListView): 
     model = Counter_Offer
     template_name= 'my_trades.html'
 
     def get_queryset(self):
-        self.trades = Trade.objects.filter(creator=self.request.user)
+        self.trades = Counter_Offer.objects.filter(creator=self.request.user)
         return self.trades
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
