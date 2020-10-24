@@ -7,6 +7,10 @@ from django.db.models.fields.files import ImageField
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from concurrent.futures import ThreadPoolExecutor
+
 
 # Create your models here.
 
@@ -34,11 +38,18 @@ class Pokemon(models.Model):
 
 
 class Counter_Offer(models.Model):
+    class Meta:
+            permissions = (('CAN_VIEW','Can view public instances'),)
+
+
     cards = ManyToManyField(Pokemon)
     trade = models.ForeignKey('Trade',on_delete=models.PROTECT,null=True)
     creator = ForeignKey(User, on_delete=models.CASCADE)
 
 class Trade(models.Model):
+    class Meta:
+        permissions = (('CAN_VIEW','Can view public instances'),)
+
     CHOICES=[('a', 'acceppted'),('p','pending'),('c','closed')]
     date_created = DateField(auto_now_add=True)
     date_completed = DateField(null=True)
@@ -62,4 +73,10 @@ def create_vault(sender, created, instance, **kwargs):
         vault_new(vault)
 
 
-    
+# add Permissions
+# content_type = ContentType.objects.get_for_model(Trade,Counter_Offer)
+# permission = Permission.objects.create(
+#     codename='CAN_VIEW',
+#     name='Can view public instances',
+#     content_type=content_type,
+# )
