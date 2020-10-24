@@ -10,7 +10,7 @@ urlpatterns = [
     path('trade/offers', views.MyOffers.as_view(), name="myoffers"),
     path('trade/', views.MyTrades.as_view(), name="mytrades"),
     path('trade/<int:pk>', views.TradeDetailView.as_view(), name="trade"),
-    path('trade/offers/counter_offer/<int:pk>', views.CreateCounterOffer.as_view(), name="counter_offer"),
+    path('trade/offers/counter_offer/<int:trade_pk>', views.CreateCounterOffer.as_view(), name="counter_offer"),
     path('market', views.Market.as_view(), name="market"),
 ]
 
