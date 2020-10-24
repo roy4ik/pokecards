@@ -57,4 +57,5 @@ class Vault(models.Model):
 @receiver(post_save, sender=User)
 def create_vault(sender, created, instance, **kwargs):
     if created:
-        profile = Vault.objects.create(user=instance)
+        vault = Vault.objects.create(user=instance)
+

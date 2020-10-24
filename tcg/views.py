@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 import json
 import requests
 import random
-from . import tcg
+from . import tcg_functions
 from tcg.forms import *
 from .models import Pokemon, Color, Type, Species, Vault, Trade, Counter_Offer
 
