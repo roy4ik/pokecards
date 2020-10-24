@@ -128,9 +128,6 @@ class TradeDetailView(DetailView):
 class MyTrades(ListView):
     model = Trade
     template_name= 'my_trades.html'
-    
-    queryset = Trade.objects.filter(public=True)
-    context_object_name = 'object_list'
 
 
 class MyOffers(ListView):
@@ -169,3 +166,5 @@ class Market(ListView):
     model = Trade
     template_name= 'my_trades.html'
     
+    queryset = Trade.objects.filter(public=True)
+    context_object_name = 'object_list'
