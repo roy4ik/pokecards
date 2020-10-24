@@ -5,12 +5,13 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView, ListView
+from django.shortcuts import get_object_or_404
 import json
 import requests
 import random
 from . import tcg
 from tcg.forms import *
-from .models import Pokemon, Color, Type, Species, Vault, Trade
+from .models import Pokemon, Color, Type, Species, Vault, Trade, Counter_Offer
 
 #  functions
 
@@ -128,8 +129,18 @@ class TradeDetailView(DetailView):
 class MyTrades(ListView):
     model = Trade
     template_name= 'my_trades.html'
-    paginate_by = 100
 
+    def get_queryset(self):
+        self.offers = Trade.objects.filter(creator=self.request.user)
+        return self.offers
+
+class MyOffers(ListView): 
+    model = Counter_Offer
+    template_name= 'my_trades.html'
+
+    def get_queryset(self):
+        self.trades = Counter_Offer.objects.filter(creator=self.request.user)
+        return self.trades
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
         return reverse('tcg.views.TradeDetail', args=[str(self.pk)])
@@ -157,3 +168,9 @@ class CreateCounterOffer(CreateView):
     success_url = ''
     failed_message = "The user couldn't create Trade"
 
+class Market(ListView):
+    model = Trade
+    template_name= 'my_trades.html'
+    
+    queryset = Trade.objects.filter(public=True)
+    context_object_name = 'object_list'
