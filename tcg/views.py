@@ -10,7 +10,7 @@ import requests
 import random
 from . import tcg
 from tcg.forms import *
-from .models import Pokemon, Color, Type, Species, Vault, Trade
+from .models import Pokemon, Color, Type, Species, Vault, Trade, Counter_Offer
 
 #  functions
 
@@ -128,7 +128,13 @@ class TradeDetailView(DetailView):
 class MyTrades(ListView):
     model = Trade
     template_name= 'my_trades.html'
-    paginate_by = 100
+    
+
+
+class MyOffers(ListView):
+    model = Counter_Offer
+    template_name= 'my_trades.html'
+    
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
@@ -157,3 +163,7 @@ class CreateCounterOffer(CreateView):
     success_url = ''
     failed_message = "The user couldn't create Trade"
 
+class Market(ListView):
+    model = Trade
+    template_name= 'my_trades.html'
+    
