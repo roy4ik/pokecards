@@ -102,10 +102,13 @@ class CreateOffer(CreateView):
         return context
         
     def form_valid(self, form):
+        print(form.cleaned_data)
+        
         self.object = form.save(commit=False)
         self.object.creator = self.request.user
         self.object.save()
-
+        self.object = form.save_m2m()
+        # still getting error after save_m2m() 'NoneType' object has no attribute '__dict__'
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -140,6 +143,7 @@ class CreateCounterOffer(CreateView):
         self.object.trade = self.get_absolute_url
         self.object.creator = self.request.user
         self.object.save()
+        self.object = form.save_m2m()
 
         return HttpResponseRedirect(self.get_success_url())
 
