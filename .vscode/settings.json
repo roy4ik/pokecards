@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "vm/poke/bin/python3.8",
+    "python.pythonPath": "${workspaceFolder}/vm/poke/bin/python3.8",
     "sqltools.connections": [
         {
             "previewLimit": 100,
@@ -7,5 +7,6 @@
             "database": "${workspaceFolder:pokecards}/db.sqlite3",
             "name": "pokedb"
         }
-    ]
+    ],
+    "python.formatting.provider": "yapf"
 }

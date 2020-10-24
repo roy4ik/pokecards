@@ -100,6 +100,9 @@ class CreateOffer(CreateView):
         form.fields['cards'].queryset = shuffle_return7(self.request)
         context['form'] = form
         return context
+    
+    def get_absolute_url(self):
+        return reverse('mytrades')
         
     def form_valid(self, form):
         print(form.cleaned_data)
@@ -109,7 +112,7 @@ class CreateOffer(CreateView):
         self.object.save()
         self.object = form.save_m2m()
         # still getting error after save_m2m() 'NoneType' object has no attribute '__dict__'
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_absolute_url())
 
 
     model = Trade
@@ -145,7 +148,7 @@ class CreateCounterOffer(CreateView):
         self.object.save()
         self.object = form.save_m2m()
 
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_absolute_url())
 
 
     model = Counter_Offer
