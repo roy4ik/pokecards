@@ -141,9 +141,10 @@ class MyOffers(ListView):
     def get_queryset(self):
         self.trades = Counter_Offer.objects.filter(creator=self.request.user)
         return self.trades
+
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
-        return reverse('tcg.views.TradeDetail', args=[str(self.pk)])
+        return reverse('myoffers')
 
     def get_context_data(self, **kwargs):
         context = super(CreateCounterOffer,self).get_context_data(**kwargs)
@@ -153,8 +154,9 @@ class CreateCounterOffer(CreateView):
         return context
         
     def form_valid(self, form):
+        print(self.get_absolute_url())
         self.object = form.save(commit=False)
-        self.object.trade = self.get_absolute_url
+        self.object.trade = Trade.objects.get(pk=self.kwargs['trade_pk'])
         self.object.creator = self.request.user
         self.object.save()
         self.object = form.save_m2m()
