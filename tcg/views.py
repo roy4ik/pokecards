@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView, ListView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 import json
 import requests
@@ -31,6 +33,11 @@ def all_cards(request):
     finally: 
         return render (request, 'all_cards.html', context)
 
+@login_required
+def vault(request):
+    return render(request, 'vault.html')
+
+@login_required
 def vault_new(request):
     context = {}
     user_deck = []
@@ -81,11 +88,7 @@ def vault_new(request):
     print("user deck initialized")
     return "Success"
 
-
-def vault(request):
-    return render(request, 'vault.html')
-    
-
+@login_required
 def trade_select(request):
     context = {}
     shuffled_deck = tcg_functions.shuffle_return7(request)
@@ -94,7 +97,7 @@ def trade_select(request):
     })
     return render(request, 'forms/trade_select.html', context)
 
-class CreateOffer(CreateView):
+class CreateOffer(LoginRequiredMixin,CreateView):
     def get_context_data(self, **kwargs):
         context = super(CreateOffer,self).get_context_data(**kwargs)
         form = TradeOffer()
@@ -115,18 +118,21 @@ class CreateOffer(CreateView):
         # still getting error after save_m2m() 'NoneType' object has no attribute '__dict__'
         return HttpResponseRedirect(self.get_absolute_url())
 
-
     model = Trade
     form_class = TradeOffer
     template_name = 'forms/create_offer.html'
     success_url = 'vault'
     failed_message = "The user couldn't create Trade"
 
-class TradeDetailView(DetailView):
+class TradeDetailView(LoginRequiredMixin,DetailView):
     model = Trade
     template_name= 'trade_details.html'
 
-class MyTrades(ListView):
+class OfferDetailView(LoginRequiredMixin,DetailView):
+    model = Counter_Offer
+    template_name= 'offer_details.html'
+
+class MyTrades(LoginRequiredMixin,ListView):
     model = Trade
     template_name= 'my_trades.html'
 
@@ -134,15 +140,15 @@ class MyTrades(ListView):
         self.offers = Trade.objects.filter(creator=self.request.user)
         return self.offers
 
-class MyOffers(ListView): 
+class MyOffers(LoginRequiredMixin,ListView): 
     model = Counter_Offer
-    template_name= 'my_trades.html'
+    template_name= 'my_offers.html'
 
     def get_queryset(self):
         self.trades = Counter_Offer.objects.filter(creator=self.request.user)
         return self.trades
 
-class CreateCounterOffer(CreateView):
+class CreateCounterOffer(LoginRequiredMixin,CreateView):
     def get_absolute_url(self):
         return reverse('myoffers')
 
@@ -170,9 +176,10 @@ class CreateCounterOffer(CreateView):
     success_url = ''
     failed_message = "The user couldn't create Trade"
 
-class Market(ListView):
+class Market(LoginRequiredMixin,ListView):
     model = Trade
-    template_name= 'my_trades.html'
-    
-    queryset = Trade.objects.filter(public=True)
-    context_object_name = 'object_list'
+    template_name= 'market.html'
+
+    def get_queryset(self):
+        self.trades = Trade.objects.filter(public=True)
+        return self.trades
