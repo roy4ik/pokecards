@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %} {%block content%}
 <h3 style="color:white; text-align:center; margin-bottom: 1.5em;">Select what you want to offer</h3>
 <form method='Post'>
-    <div class="grid">
+    <div class="grid" id="id_cards">
         {% csrf_token %} {% for mci, name in form.cards.field.widget.choices %}
         <label for="id_cards_{{forloop.counter0}}"><input type="checkbox" name="cards" value="{{mci}}" id="id_cards_{{forloop.counter0}}">
             <div id=grid_card_{{forloop.counter0}}>{% include 'partials/card.html' with pokemon=mci.instance %}</div></label> {% endfor %}
