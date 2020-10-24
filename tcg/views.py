@@ -129,12 +129,14 @@ class MyTrades(ListView):
     model = Trade
     template_name= 'my_trades.html'
     
+    queryset = Trade.objects.filter(public=True)
+    context_object_name = 'object_list'
 
 
 class MyOffers(ListView):
     model = Counter_Offer
     template_name= 'my_trades.html'
-    
+
 
 class CreateCounterOffer(CreateView):
     def get_absolute_url(self):
