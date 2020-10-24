@@ -70,8 +70,7 @@ class Vault(models.Model):
 def create_vault(sender, created, instance, **kwargs):
     if created:
         vault = Vault.objects.create(user=instance)
-        with ThreadPoolExecutor(max_workers=3) as executor:
-            vault_new(vault)
+        vault_new(vault)
 
 
 # add Permissions
